@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winpath Diagnostics | Precision Pathology</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2C5EB4',
+                            cyan: '#27BBD4',
+                            green: '#5DCE9E',
+                            dark: '#0B131D',
+                        }
+                    },
+                    fontFamily: { sans: ['Outfit', 'Inter', 'sans-serif'] },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        'pulse-slow': { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.6' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #27BBD4; border-radius: 10px; }
+        
+        body { font-family: 'Outfit', sans-serif; background-color: #ffffff; -webkit-tap-highlight-color: transparent; }
+        
+        .brand-gradient-text {
+            background: linear-gradient(to right, #2C5EB4, #27BBD4, #5DCE9E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-gradient-bg {
+            background: linear-gradient(to right, #2C5EB4, #27BBD4, #5DCE9E);
+        }
+
+        .specialty-pill { transition: all 0.4s ease; }
+        .specialty-pill:hover { transform: translateY(-5px); background: white; box-shadow: 0 15px 30px -10px rgba(44, 94, 180, 0.15); }
+        
+        .floating-wa { position: fixed; bottom: 24px; right: 24px; z-index: 100; animation: float 3s ease-in-out infinite; }
+    </style>
+</head>
+
+<body class="text-gray-800 antialiased selection:bg-brand-cyan selection:text-white overflow-x-hidden">
+
+    <!-- FLOATING WHATSAPP CTA -->
+    <a href="https://wa.me/919380116362?text=Hello%20Winpath%20Team!%20I'd%20like%20to%20book%20a%20home%20collection." target="_blank" rel="noopener noreferrer" class="floating-wa flex items-center gap-3 bg-brand-green text-white px-5 py-3 rounded-full shadow-2xl hover:scale-105 transition-transform">
+        <span class="text-[10px] font-black uppercase tracking-widest hidden sm:block text-right leading-none">Book Home<br>Collection</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 0 5.495 0 12.05c0 2.096.547 4.142 1.588 5.945L0 24l6.105-1.604a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 flex flex-col">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="flex items-center shrink-0">
+                <img src="https://raw.githubusercontent.com/winpathdiagnostics/Trial-3/main/WINPATH-LOGO-OG2.png" alt="Winpath" class="h-8 sm:h-10 w-auto object-contain">
+            </a>
+
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex items-center gap-8 mr-4">
+                    <a href="#specialties" class="text-xs font-black text-gray-500 hover:text-brand-blue uppercase tracking-widest transition-colors">Specialties</a>
+                    <a href="#packages" class="text-xs font-black text-gray-500 hover:text-brand-blue uppercase tracking-widest transition-colors">Packages</a>
+                    <a href="#about" class="text-xs font-black text-gray-500 hover:text-brand-blue uppercase tracking-widest transition-colors">About Us</a>
+                </nav>
+
+                <!-- Desktop Contact Button -->
+                <a href="#contact" class="hidden sm:block relative group active:scale-95 transition-all">
+                    <span class="absolute -inset-1.5 brand-gradient-bg rounded-xl blur-md opacity-20 group-hover:opacity-60 transition-opacity"></span>
+                    <div class="relative px-6 py-2.5 brand-gradient-bg text-sm font-black uppercase tracking-widest rounded-xl shadow-lg text-white">Contact Us</div>
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="lg:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="p-2 text-brand-blue focus:outline-none">
+                        <svg id="menu-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg id="close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-xl">
+            <div class="px-6 py-8 space-y-6 flex flex-col items-center uppercase font-black text-base tracking-widest">
+                <a href="#specialties" onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-blue">Specialties</a>
+                <a href="#packages" onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-blue">Health Packages</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-gray-600 hover:text-brand-blue">About Us</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="w-full py-4 text-center brand-gradient-bg text-white rounded-2xl">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 lg:pt-32">
+        <!-- Hero Section -->
+        <section id="home" class="py-12 md:py-24 px-4 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 text-center lg:text-left">
+                <div class="order-1 flex flex-col items-center lg:items-start">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-cyan/20 bg-brand-cyan/5 text-brand-blue font-bold text-[9px] sm:text-[10px] uppercase tracking-[0.2em] mb-6 shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full brand-gradient-bg animate-pulse"></span>
+                        Strictly Adhering to ISO 15189:2022 Standards
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter mb-4 text-gray-900 leading-[1.1]">
+                        Precision Diagnostics, <br><span class="brand-gradient-text">Accurate Results.</span>
+                    </h1>
+                    <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-blue/90 mb-8 tracking-tight italic">Exceptional Care.</div>
+                    <p class="text-base sm:text-lg text-gray-600 mb-8 font-medium max-w-xl leading-relaxed">
+                        Bengaluru's trusted pathologist-led lab. Reach out to us directly via WhatsApp to securely schedule a professional home collection for over 100+ clinical investigations.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                        <a href="https://wa.me/919380116362?text=Hello%20Winpath%20Team!%20I'd%20like%20to%20schedule%20a%20home%20collection." target="_blank" class="w-full sm:w-auto px-10 py-5 brand-gradient-bg text-white font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl text-center active:scale-95 transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 0 5.495 0 12.05c0 2.096.547 4.142 1.588 5.945L0 24l6.105-1.604a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                            Message on WhatsApp
+                        </a>
+                        <a href="tel:+919380116362" class="w-full sm:w-auto px-10 py-5 bg-white text-brand-blue font-black uppercase tracking-widest text-[10px] rounded-2xl border-2 border-brand-blue/10 hover:border-brand-blue active:scale-95 transition-all text-center flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            Call Us Now
+                        </a>
+                    </div>
+                </div>
+                <div class="order-2 relative w-full group">
+                    <div class="absolute -inset-6 sm:-inset-10 brand-gradient-bg rounded-full opacity-5 blur-[80px] animate-pulse-slow"></div>
+                    <img src="https://raw.githubusercontent.com/winpathdiagnostics/LAB_FINAL/main/hematology.png" alt="Diagnostic Laboratory" onerror="this.src='https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=2070&auto=format&fit=crop';" class="relative rounded-[2rem] sm:rounded-[3rem] shadow-2xl w-full h-auto object-cover border-[8px] border-white transition-transform duration-1000 group-hover:scale-[1.02]">
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagnostic Specialties -->
+        <section id="specialties" class="py-20 bg-gray-50 border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <div class="inline-flex items-center gap-3 px-4 py-1 bg-brand-blue/10 text-brand-blue rounded-full text-[9px] font-black tracking-[0.3em] mb-6 uppercase">Laboratory Expertise</div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-16 tracking-tighter uppercase leading-none italic">Diagnostic <span class="brand-gradient-text">Specialties.</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-blue/5 border-l-4 border-brand-blue flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Hematology</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-cyan/5 border-l-4 border-brand-cyan flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Biochemistry</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-green/5 border-l-4 border-brand-green flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Immunology</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-blue/5 border-l-4 border-brand-blue flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Microbiology</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-cyan/5 border-l-4 border-brand-cyan flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight leading-tight">Clinical<br>Pathology</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-green/5 border-l-4 border-brand-green flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Cytopathology</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-blue/5 border-l-4 border-brand-blue flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight leading-tight">Molecular<br>Diagnostics</h4></div>
+                    <div class="specialty-pill px-6 py-6 sm:py-8 rounded-[1.5rem] bg-brand-cyan/5 border-l-4 border-brand-cyan flex items-center justify-center text-center"><h4 class="text-sm sm:text-base font-bold text-gray-900 uppercase tracking-tight">Serology</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Static Featured Packages -->
+        <section id="packages" class="py-20 sm:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter uppercase">
+                        Popular Health <span class="brand-gradient-text italic">Packages.</span>
+                    </h2>
+                    <p class="text-lg text-gray-500 font-medium mt-4 max-w-2xl mx-auto">Contact us to book one of our comprehensive, pathologist-verified screening profiles. No online payment required.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Package 1 -->
+                    <div class="bg-gray-50 p-8 rounded-[2.5rem] border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all">
+                        <h3 class="text-xl font-black text-gray-900 mb-2">Master Health Checkup</h3>
+                        <p class="text-[11px] text-gray-500 font-medium leading-relaxed mb-6 italic">A complete clinical audit of major organ systems. Highly recommended once a year.</p>
+                        <div class="mb-6 bg-white p-4 rounded-2xl border border-gray-100">
+                            <p class="text-[9px] font-black text-brand-blue uppercase tracking-widest mb-1">Includes</p>
+                            <p class="text-xs font-semibold text-gray-600 line-clamp-3">CBC, LFT, RFT, Lipid, HbA1c, Vitamin D, Vitamin B12, Urine Routine, Thyroid, Fasting Sugar</p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/919380116362?text=Hi!%20I%20would%20like%20to%20book%20the%20Master%20Health%20Checkup." target="_blank" class="block w-full py-4 text-center bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-dark transition-all">Book via WhatsApp</a>
+                        </div>
+                    </div>
+
+                    <!-- Package 2 -->
+                    <div class="bg-white p-8 rounded-[2.5rem] border-2 border-brand-cyan/30 shadow-xl flex flex-col h-full transform lg:scale-105 z-10 relative">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 brand-gradient-bg rounded-full text-white text-[8px] font-black uppercase tracking-widest shadow-md">Most Popular</div>
+                        <h3 class="text-xl font-black text-gray-900 mb-2">Full Body Checkup</h3>
+                        <p class="text-[11px] text-gray-500 font-medium leading-relaxed mb-6 italic">Essential baseline organ health screen for routine monitoring of metabolic health.</p>
+                        <div class="mb-6 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                            <p class="text-[9px] font-black text-brand-blue uppercase tracking-widest mb-1">Includes</p>
+                            <p class="text-xs font-semibold text-gray-600 line-clamp-3">CBC, Sugar, Lipid Profile, LFT, RFT, Urine Routine</p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/919380116362?text=Hi!%20I%20would%20like%20to%20book%20the%20Full%20Body%20Checkup." target="_blank" class="block w-full py-4 text-center brand-gradient-bg text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-lg transition-all">Book via WhatsApp</a>
+                        </div>
+                    </div>
+
+                    <!-- Package 3 -->
+                    <div class="bg-gray-50 p-8 rounded-[2.5rem] border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all">
+                        <h3 class="text-xl font-black text-gray-900 mb-2">Women's Health Package</h3>
+                        <p class="text-[11px] text-gray-500 font-medium leading-relaxed mb-6 italic">Specifically designed to monitor reproductive health, hormonal balance, and iron levels.</p>
+                        <div class="mb-6 bg-white p-4 rounded-2xl border border-gray-100">
+                            <p class="text-[9px] font-black text-brand-blue uppercase tracking-widest mb-1">Includes</p>
+                            <p class="text-xs font-semibold text-gray-600 line-clamp-3">CBC, Thyroid Profile, Iron, Calcium, Vitamin D</p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/919380116362?text=Hi!%20I%20would%20like%20to%20book%20the%20Women's%20Health%20Package." target="_blank" class="block w-full py-4 text-center bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-dark transition-all">Book via WhatsApp</a>
+                        </div>
+                    </div>
+
+                    <!-- Package 4 -->
+                    <div class="bg-gray-50 p-8 rounded-[2.5rem] border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all">
+                        <h3 class="text-xl font-black text-gray-900 mb-2">Seniors Health Screen</h3>
+                        <p class="text-[11px] text-gray-500 font-medium leading-relaxed mb-6 italic">Targets age-related risks including chronic inflammation, blood sugar stability, and renal filtration.</p>
+                        <div class="mb-6 bg-white p-4 rounded-2xl border border-gray-100">
+                            <p class="text-[9px] font-black text-brand-blue uppercase tracking-widest mb-1">Includes</p>
+                            <p class="text-xs font-semibold text-gray-600 line-clamp-3">CBC, HbA1c, Cardiac Profile, RFT, Vitamin D</p>
+                        </div>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/919380116362?text=Hi!%20I%20would%20like%20to%20book%20the%20Seniors%20Health%20Screen." target="_blank" class="block w-full py-4 text-center bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-dark transition-all">Book via WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <p class="text-sm font-bold text-gray-400 italic text-center">Looking for a specific standalone test? We offer over 100+ investigations.</p>
+                    <a href="https://wa.me/919380116362?text=Hi,%20I%20am%20looking%20for%20a%20specific%20blood%20test." target="_blank" class="px-6 py-2 border-2 border-gray-200 rounded-full text-xs font-bold text-gray-600 hover:border-brand-blue hover:text-brand-blue transition-colors">Message us for details</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-gray-50 border-t border-gray-100">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-cyan/20 bg-brand-cyan/5 text-brand-blue font-bold text-[10px] uppercase tracking-widest mb-8">The Winpath Story</div>
+                <h2 class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tighter uppercase mb-12">Clinical Integrity. <br><span class="brand-gradient-text">Personal Care.</span></h2>
+                
+                <div class="prose prose-lg text-gray-600 space-y-8 font-medium leading-relaxed mx-auto text-left">
+                    <p>Winpath Diagnostics was founded on a singular premise: <span class="font-black text-gray-900 text-xl tracking-tight leading-tight">that every sample represents a person awaiting an answer.</span> I started this lab because I believe healthcare deserves a personal touch that corporate diagnostics often lacks.</p>
+                    
+                    <div class="bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm border border-gray-100 my-12">
+                        <h3 class="text-2xl font-black text-gray-900 mb-6 tracking-tight">Meet Your Pathologist</h3>
+                        <div class="flex flex-col sm:flex-row gap-8 items-start">
+                            <div class="flex-1">
+                                <h4 class="text-brand-blue font-black text-lg mb-1">Dr. Joswin Rakesh Dsa</h4>
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">MBBS (KSHEMA), MD Pathology (KMC Manipal)</p>
+                                <p class="text-sm leading-relaxed text-gray-500 mb-6">As a <strong>first-generation doctor</strong>, my journey into medicine was fueled by a desire to make a difference. After pursuing my MBBS and completing my postgraduation in Pathology from the prestigious <strong>Kasturba Medical College (KMC)</strong>, I saw the need for a lab that prioritizes accuracy over volume and stringent data privacy over digital trends.</p>
+                                <div class="flex gap-4">
+                                    <div class="px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-[10px] font-black uppercase tracking-widest text-brand-cyan">Self-Funded</div>
+                                    <div class="px-4 py-2 bg-gray-50 rounded-xl border border-gray-200 text-[10px] font-black uppercase tracking-widest text-brand-blue">Independent</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Unlike many modern facilities, Winpath is <strong>completely self-funded and doctor-owned</strong>. We aren't answerable to corporate boards or investors—we are answerable only to you. This independence allows us to maintain the rigorous <strong>ISO 15189:2022 standards</strong> without compromise.</p>
+                    
+                    <p><strong>Strict Privacy Guarantee:</strong> To protect your sensitive medical data, we do not collect personal information via web forms. All bookings and reports are securely handled through direct, end-to-end encrypted communication channels via WhatsApp.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 sm:py-32 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tighter uppercase mb-6 text-center">Contact <span class="brand-gradient-text italic">Us.</span></h2>
+                <p class="text-gray-500 mb-12 font-medium">For inquiries, home collection bookings, or report status, reach out directly. No forms, no wait times.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-gray-50 rounded-[3rem] p-10 border border-gray-100 hover:border-brand-green/50 transition-colors">
+                        <div class="w-16 h-16 bg-brand-green/10 text-brand-green rounded-2xl flex items-center justify-center mb-8"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 0 5.495 0 12.05c0 2.096.547 4.142 1.588 5.945L0 24l6.105-1.604a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+                        <h3 class="text-xl font-black mb-2 text-gray-900 uppercase tracking-tight">WhatsApp Us</h3>
+                        <p class="text-sm text-gray-500 mb-8 leading-relaxed italic">Fastest booking route. Secure and encrypted.</p>
+                        <a href="https://wa.me/919380116362?text=Hello%20Winpath%20Team!%20I'd%20like%20to%20book%20a%20home%20collection." target="_blank" rel="noopener noreferrer" class="block w-full bg-brand-green text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] text-center shadow-lg hover:bg-green-600 transition-all">Message on WhatsApp</a>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-[3rem] p-10 border border-gray-100 flex flex-col justify-between">
+                        <div class="space-y-8">
+                            <div>
+                                <span class="text-[9px] font-black uppercase text-brand-blue block mb-1">Direct Call</span>
+                                <a href="tel:+919380116362" class="text-2xl font-bold text-gray-900 tracking-tight hover:text-brand-blue transition-colors">+91 93801 16362</a>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-black uppercase text-brand-blue block mb-1">Email Support</span>
+                                <a href="mailto:winpathdiagnostics@gmail.com" class="text-lg font-bold text-gray-900 break-all tracking-tight hover:text-brand-blue transition-colors">winpathdiagnostics@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="pt-6 border-t border-gray-200 mt-10">
+                            <p class="text-[11px] text-gray-500 font-medium italic">
+                                Mon — Sat: 7 AM - 8 PM<br>
+                                Sun: 7 AM - 1 PM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12 text-left">
+                <div>
+                    <img src="https://raw.githubusercontent.com/winpathdiagnostics/Trial-3/main/WINPATH-LOGO-OG2.png" alt="Winpath" class="h-10 mb-6 grayscale brightness-200">
+                    <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-sm italic">Bengaluru's premier pathologist-led diagnostic center. Clinical excellence since 2012.</p>
+                </div>
+                
+                <div class="flex flex-col gap-4 font-bold text-gray-400 text-xs tracking-widest uppercase">
+                    <a href="#specialties" class="hover:text-brand-cyan transition-colors">Specialties</a>
+                    <a href="#packages" class="hover:text-brand-cyan transition-colors">Health Packages</a>
+                    <a href="#about" class="hover:text-brand-cyan transition-colors">About Us</a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="bg-gray-900/50 p-6 rounded-[2rem] border border-gray-800">
+                    <h4 class="text-brand-cyan text-[9px] font-black uppercase tracking-[0.3em] mb-3">Accreditation</h4>
+                    <p class="text-gray-400 text-[10px] leading-relaxed mb-4 italic">Strict ISO 15189:2022 protocols for precision in clinical reporting.</p>
+                    <div class="flex gap-2">
+                        <div class="px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 rounded text-[8px] font-black text-brand-blue uppercase tracking-widest">ISO 15189</div>
+                        <div class="px-3 py-1 bg-brand-green/10 border border-brand-green/20 rounded text-[8px] font-black text-brand-green uppercase tracking-widest">Verified</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-[9px] font-black uppercase tracking-[0.2em]">© 2026 Winpath Diagnostics. Bengaluru, KA.</p>
+                <div class="flex items-center gap-2 font-black text-[9px] text-gray-600 uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></span> 
+                    Secure & Private
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minimal script for mobile menu -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            menuIcon.classList.toggle('hidden', !isOpen);
+            closeIcon.classList.toggle('hidden', isOpen);
+        }
+    </script>
+</body>
+</html>
